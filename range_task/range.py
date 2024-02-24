@@ -1,6 +1,11 @@
 class Range:
-
     def __init__(self, start, end):
+        if not isinstance(start, int):
+            raise TypeError(f"Начало диапазона должно быть целым числом, а не {type(start).__name__}")
+
+        if not isinstance(start, int):
+            raise TypeError(f"Конец диапазона должен быть целым числом, а не {type(end).__name__}")
+
         self.__start = start
         self.__end = end
 
