@@ -10,7 +10,7 @@ class Range:
         self.__end = end
 
     def __repr__(self):
-        return f"({self.__start};{self.__end})"
+        return f"Range({self.__start!r};{self.__end!r})"
 
     @property
     def start(self):

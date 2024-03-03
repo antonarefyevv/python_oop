@@ -17,3 +17,5 @@ print(range_1.get_intersection(range_2))
 print(range_1.get_union(range_3))
 
 print(range_2.get_difference(range_1))
+
+print(range_1)

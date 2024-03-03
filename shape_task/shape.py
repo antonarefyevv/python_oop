@@ -24,6 +24,18 @@ class Square(Shape, ABC):
     def __init__(self, side_length):
         self.__side_length = side_length
 
+    def __repr__(self):
+        return f"Square({self.__side_length})"
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+
+        return self.__side_length == other.__side_length
+
+    def __hash__(self):
+        return self.__side_length
+
     def get_height(self):
         return self.__side_length
 
@@ -39,13 +51,26 @@ class Square(Shape, ABC):
 
 class Triangle(Shape, ABC):
 
-    def __init__(self, x_1, x_2, x_3, y_1, y_2, y_3):
+    def __init__(self, x_1, y_1, x_2, y_2, x_3, y_3):
         self.__x_1 = x_1
-        self.__x_2 = x_2
-        self.__x_3 = x_3
         self.__y_1 = y_1
+        self.__x_2 = x_2
         self.__y_2 = y_2
+        self.__x_3 = x_3
         self.__y_3 = y_3
+
+    def __repr__(self):
+        return f"Triangle({self.__x_1}, {self.__y_1}, {self.__x_2}, {self.__y_2}, {self.__x_3}, {self.__y_3})"
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+
+        return self.__x_1 == other.__x_1 and self.__y_1 == other.__y_1 and self.__x_2 == other.__x_2 and self.__y_2 == \
+            other.__y_2 and self.__x_3 == other.__x_3 and self.__y_3 == other.__y_3
+
+    def __hash__(self):
+        return [self.__x_1, self.__y_1, self.__x_2, self.__y_2, self.__x_3, self.__y_3]
 
     def get_width(self):
         return max(self.__x_1, self.__x_2, self.__x_3) - min(self.__x_1, self.__x_2, self.__x_3)
@@ -73,6 +98,18 @@ class Rectangle(Shape, ABC):
         self.__side_length = side_length
         self.__side_width = side_width
 
+    def __repr__(self):
+        return f"Rectangle({self.__side_width}, {self.__side_length})"
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+
+        return self.__side_length == other.__side_length and self.__side_width == other.__side_width
+
+    def __hash__(self):
+        return [self.__side_length, self.__side_width]
+
     def get_width(self):
         return self.__side_width
 
@@ -90,6 +127,18 @@ class Circle(Shape, ABC):
     def __init__(self, radius):
         self.__radius = radius
 
+    def __repr__(self):
+        return f"Circle({self.__radius})"
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+
+        return self.__radius == other.__radius
+
+    def __hash__(self):
+        return self.__radius
+
     def get_width(self):
         return self.__radius / 2
 
@@ -97,7 +146,7 @@ class Circle(Shape, ABC):
         return self.__radius / 2
 
     def get_area(self):
-        return math.pi * math.pow(self.__radius, 2)
+        return float(f"{math.pi * math.pow(self.__radius, 2):.2f}")
 
     def get_perimeter(self):
-        pass
+        return 0
