@@ -32,6 +32,7 @@ square_2 = Square(15)
 triangle_2 = Triangle(0, 2, 1, 5, 1, 8)
 
 circle_2 = Circle(8)
+print(circle_2)
 
 print(circle_2.get_area())
 
@@ -40,5 +41,4 @@ print(f"Фигура с максимальной площадью из зада�
 print(
     f"Фигура со вторым по величине периметром из заданного списка фигур = {get_shape_with_next_perimeter_after_max(shapes_list)})")
 
-print(circle_2.__eq__(circle_1))
-print(circle_2.__hash__())
+

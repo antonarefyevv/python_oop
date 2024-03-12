@@ -1,21 +1,14 @@
 from range_task.range import Range
 
-range_1 = Range(1, 5)
-print(range_1.get_length())
+range_1 = Range(1, 7)
 
-range_2 = Range(2, 5)
-print(range_2.get_length())
+range_2 = Range(5, 9)
 
-range_3 = Range(7, 9)
-print(range_3.get_length())
+intersection_range = range_1.get_intersection(range_2)
+print(intersection_range)
 
-print(range_3.start)
-print(range_2.is_inside(5))
+union_range = range_1.get_union(range_2)
+print(union_range)
 
-print(range_1.get_intersection(range_2))
-
-print(range_1.get_union(range_3))
-
-print(range_2.get_difference(range_1))
-
-print(range_1)
+difference_range = range_1.get_difference(range_2)
+print(difference_range)

@@ -1,16 +1,13 @@
 class Range:
-    def __init__(self, start, end):
-        if not isinstance(start, int):
-            raise TypeError(f"Начало диапазона должно быть целым числом, а не {type(start).__name__}")
+    def __init__(self, start: float, end: float):
+        if isinstance(start, str):
+            raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
-        if not isinstance(start, int):
-            raise TypeError(f"Конец диапазона должен быть целым числом, а не {type(end).__name__}")
+        if isinstance(end, str):
+            raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
-        self.__start = start
-        self.__end = end
-
-    def __repr__(self):
-        return f"Range({self.__start!r};{self.__end!r})"
+        self.__start = float(start)
+        self.__end = float(end)
 
     @property
     def start(self):
@@ -18,6 +15,9 @@ class Range:
 
     @start.setter
     def start(self, start):
+        if isinstance(start, str):
+            raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
+
         self.__start = start
 
     @property
@@ -26,7 +26,21 @@ class Range:
 
     @end.setter
     def end(self, end):
+        if isinstance(end, str):
+            raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
+
         self.__end = end
+
+    def __repr__(self):
+        return f"Range({self.__start!r}; {self.__end!r})"
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+        return self.__start == other.__end and self.__end == other.__end
+
+    def __lt__(self, other):
+        return self.__start > other.__start
 
     def get_length(self):
         return self.__end - self.__start
@@ -34,49 +48,55 @@ class Range:
     def is_inside(self, number):
         return self.__start <= number <= self.__end
 
-    def get_intersection(self, numbers_range):
-        items = []
+    def get_intersection(self, other):
+        self_start = self.__start
+        self_end = self.__end
+        other_start = other.__start
+        other_end = other.__end
+        new_range_1 = Range(self_start, self_end)
+        new_range_2 = Range(other_start, other_end)
 
-        if self.__end <= numbers_range.__start:
-            return None
-        else:
-            if self.__start > numbers_range.__start:
-                items.append(self.__start)
-            else:
-                items.append(numbers_range.__start)
+        if self_end <= other_start or self_start >= other_end:
+            return f'Результат пересечения диапазонов {new_range_1}, {new_range_2}' \
+                   f' = {None}'
 
-            if self.__end < numbers_range.__end:
-                items.append(self.__end)
-            else:
-                items.append(numbers_range.__end)
+        result_start = max(self_start, other_start)
+        result_end = min(self_end, other_end)
+        new_range = Range(result_start, result_end)
+        return f'Результат пересечения диапазонов {new_range_1}, {new_range_2}' \
+               f' = {new_range}'
 
-        return items
+    def get_union(self, other):
+        self_start = float(self.__start)
+        self_end = self.__end
+        other_start = other.__start
+        other_end = other.__end
+        new_range_1 = Range(self_start, self_end)
+        new_range_2 = Range(other_start, other_end)
 
-    def get_union(self, numbers_range):
-        items = []
+        if self_end < other_start or other_end < self_start:
+            return f'Результат объединения диапазонов {new_range_1}, {new_range_2}' \
+                   f' = [{new_range_1}, {new_range_2}]'
 
-        if self.__end < numbers_range.__start:
-            items.append(self)
-            items.append(numbers_range)
-        else:
-            if self.__start <= numbers_range.__start:
-                items.append(self.__start)
-            else:
-                items.append(numbers_range.__start)
+        result_start = min(self_start, other_start)
+        result_end = max(self_end, other_end)
+        new_range = Range(result_start, result_end)
+        return f'Результат объединения диапазонов {Range(self_start, self_end)}, {Range(other_start, other_end)}' \
+               f' = {new_range}'
 
-            if self.__end >= numbers_range.__end:
-                items.append(self.__end)
-            else:
-                items.append(numbers_range.__end)
+    def get_difference(self, other):
+        self_start = self.__start
+        self_end = self.__end
+        other_start = other.__start
+        other_end = other.__end
+        new_range_1 = Range(self_start, self_end)
+        new_range_2 = Range(other_start, other_end)
 
-        return items
+        if self_end > other_start:
+            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {[Range(self_start, other_start), Range(self_end, other_end)]}'
 
-    def get_difference(self, numbers_range):
-        items = []
+        if self_end > other_end:
+            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {Range(other_end, self_end)}'
 
-        if self.__start != numbers_range.__start and self.__start != numbers_range.__end:
-            items.append(self.__start)
-        if self.__end != numbers_range.__end and self.__end != numbers_range.__start:
-            items.append(self.__end)
-
-        return items
+        return f'Результат вычитания диапазонов {new_range_1}, {new_range_2}' \
+               f' = {None}'
