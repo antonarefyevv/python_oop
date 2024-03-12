@@ -101,7 +101,7 @@ class Range:
         new_range_1 = Range(self_start, self_end)
         new_range_2 = Range(other_start, other_end)
 
-        if self_start < other_start and self_end > other_start:
+        if self_start < other_start < self_end:
             return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {Range(self_start, other_start)}'
         if self_end > other_end and self_start < other_start:
             return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {[Range(self_start, other_start), Range(other_end, self_end)]}'
