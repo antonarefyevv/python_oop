@@ -6,6 +6,9 @@ class Range:
         if isinstance(end, str):
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
+        if start >= end:
+            raise ValueError("Начало диапазона должно быть меньше конца")
+
         self.__start = float(start)
         self.__end = float(end)
 
@@ -18,7 +21,10 @@ class Range:
         if isinstance(start, str):
             raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
-        self.__start = start
+        if start >= self.__end:
+            raise ValueError("Начало диапазона должно быть меньше конца")
+
+        self.__start = float(start)
 
     @property
     def end(self):
@@ -29,8 +35,10 @@ class Range:
         if isinstance(end, str):
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
-        self.__end = end
+        if self.__start >= end:
+            raise ValueError("Начало диапазона должно быть меньше конца")
 
+        self.__end = float(end)
     def __repr__(self):
         return f"Range({self.__start!r}; {self.__end!r})"
 
