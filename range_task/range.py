@@ -21,7 +21,7 @@ class Range:
         if isinstance(start, str):
             raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
-        if start >= self.__end:
+        if start > self.__end:
             raise ValueError("Начало диапазона должно быть меньше конца")
 
         self.__start = float(start)
@@ -35,10 +35,11 @@ class Range:
         if isinstance(end, str):
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
-        if self.__start >= end:
+        if self.__start > end:
             raise ValueError("Начало диапазона должно быть меньше конца")
 
         self.__end = float(end)
+
     def __repr__(self):
         return f"Range({self.__start!r}; {self.__end!r})"
 
@@ -100,11 +101,10 @@ class Range:
         new_range_1 = Range(self_start, self_end)
         new_range_2 = Range(other_start, other_end)
 
-        if self_end > other_start:
-            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {[Range(self_start, other_start), Range(self_end, other_end)]}'
-
-        if self_end > other_end:
-            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {Range(other_end, self_end)}'
+        if self_start < other_start and self_end > other_start:
+            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {Range(self_start, other_start)}'
+        if self_end > other_end and self_start < other_start:
+            return f'Результат вычитания диапазонов {new_range_1}, {new_range_2} = {[Range(self_start, other_start), Range(other_end, self_end)]}'
 
         return f'Результат вычитания диапазонов {new_range_1}, {new_range_2}' \
                f' = {None}'
