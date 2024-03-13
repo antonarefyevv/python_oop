@@ -22,6 +22,11 @@ class Shape(ABC):
 
 class Square(Shape, ABC):
     def __init__(self, side_length):
+        if isinstance(side_length, str):
+            raise TypeError(f'Длина стороны квадрата должна быть числом, а не {type(side_length).__name__}')
+        if side_length <= 0:
+            raise ValueError(f'Длина стороны квадрата должна быть больше нуля')
+
         self.__side_length = side_length
 
     def __repr__(self):
@@ -95,6 +100,15 @@ class Triangle(Shape, ABC):
 
 class Rectangle(Shape, ABC):
     def __init__(self, side_length, side_width):
+        if isinstance(side_length, str):
+            raise TypeError(f'Длина стороны прямоугольника должна быть числом, а не {type(side_length).__name__}')
+        if isinstance(side_width, str):
+            raise TypeError(f'Ширина стороны прямоугольника должна быть числом, а не {type(side_length).__name__}')
+        if side_length <= 0:
+            raise ValueError(f'Длина стороны квадрата должна быть больше нуля')
+        if side_width <= 0:
+            raise ValueError(f'Ширина стороны квадрата должна быть больше нуля')
+
         self.__side_length = side_length
         self.__side_width = side_width
 
@@ -125,6 +139,11 @@ class Rectangle(Shape, ABC):
 
 class Circle(Shape, ABC):
     def __init__(self, radius):
+        if isinstance(radius, str):
+            raise TypeError(f'Радиус круга должен быть числом, а не {type(side_length).__name__}')
+        if radius <= 0:
+            raise ValueError(f'Радиус круга должен быть больше нуля')
+
         self.__radius = radius
 
     def __repr__(self):

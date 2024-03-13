@@ -37,8 +37,7 @@ print(circle_2)
 print(circle_2.get_area())
 
 shapes_list = [square_1, square_2, triangle_1, triangle_2, rectangle_1, circle_2]
+
 print(f"Фигура с максимальной площадью из заданного списка фигур = {get_shape_with_max_area(shapes_list)})")
 print(
     f"Фигура со вторым по величине периметром из заданного списка фигур = {get_shape_with_next_perimeter_after_max(shapes_list)})")
-
-
