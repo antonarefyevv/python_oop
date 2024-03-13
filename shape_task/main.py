@@ -19,7 +19,7 @@ def get_shape_with_next_perimeter_after_max(items):
     return sorted_list[1]
 
 
-rectangle_1 = Rectangle(10, 5)
+rectangle_1 = Rectangle(9, 5)
 
 circle_1 = Circle(10)
 
