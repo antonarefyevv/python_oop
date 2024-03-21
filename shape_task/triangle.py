@@ -5,9 +5,10 @@ import math
 class Triangle(Shape):
 
     def __init__(self, x_1, y_1, x_2, y_2, x_3, y_3):
-        if not isinstance(x_1,x_2: float, float) or not isinstance(x_1, int):
-            raise TypeError(f'Длина стороны прямоугольника должна быть числом, а не {type(side_length).__name__}')
-
+        arg_list = [x_1, y_1, x_2, y_2, x_3, y_3]
+        for arg in arg_list:
+            if not isinstance(arg_list[arg], (float, int)):
+                raise TypeError(f'Координаты треугольника должны быть числом, a не {type(arg).__name__}')
 
         self.__x_1 = x_1
         self.__y_1 = y_1
