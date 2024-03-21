@@ -14,6 +14,3 @@ print(f'Результат объединения диапазонов Range{ran
 
 difference_range = range_1.get_difference(range_2)
 print(f'Результат разности диапазонов Range{range_1} и Range{range_2} = Range{difference_range}')
-
-
-
