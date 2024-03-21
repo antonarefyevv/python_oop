@@ -1,9 +1,9 @@
 class Range:
     def __init__(self, start: float, end: float):
-        if not isinstance(start, float) and not isinstance(start, int):
+        if not isinstance(start, (float, int)):
             raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
-        if not isinstance(end, float) and not isinstance(end, int):
+        if not isinstance(end, (float, int)):
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
         if start >= end:
@@ -18,7 +18,7 @@ class Range:
 
     @start.setter
     def start(self, start):
-        if isinstance(start, str):
+        if not isinstance(start, (float, int)):
             raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
         if start >= self.__end:
@@ -32,7 +32,7 @@ class Range:
 
     @end.setter
     def end(self, end):
-        if isinstance(end, str):
+        if not isinstance(end, (float, int)):
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
         if self.__start >= end:

@@ -1,4 +1,7 @@
-from shape_task.shape import Shape, Rectangle, Triangle, Square, Circle
+from shape_task.rectangle import Rectangle
+from shape_task.triangle import Triangle
+from shape_task.square import Square
+from shape_task.circle import Circle
 
 
 def get_shape_with_max_area(items):
