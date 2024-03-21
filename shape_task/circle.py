@@ -1,12 +1,13 @@
 from shape_task.shape import Shape
+import math
 
 
 class Circle(Shape):
     def __init__(self, radius):
-        if not isinstance(radius, float) and not isinstance(radius, int):
+        if not isinstance(radius, (float, int)):
             raise TypeError(f'Радиус круга должен быть числом, а не {type(radius).__name__}')
         if radius <= 0:
-            raise ValueError(f'Радиус круга должен быть больше нуля')
+            raise ValueError('Радиус круга должен быть больше нуля')
 
         self.__radius = radius
 
@@ -20,7 +21,7 @@ class Circle(Shape):
         return self.__radius == other.__radius
 
     def __hash__(self):
-        return self.__radius
+        return hash(self.__radius)
 
     def get_width(self):
         return self.__radius / 2

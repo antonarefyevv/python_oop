@@ -26,7 +26,8 @@ rectangle_1 = Rectangle(9, 5)
 
 circle_1 = Circle(10)
 
-triangle_1 = Triangle(1, 4, 5, 2, 6, 7)
+triangle_1 = Triangle(1, 0, 5, 2, 6, 7)
+print(triangle_1)
 
 square_1 = Square(5)
 
