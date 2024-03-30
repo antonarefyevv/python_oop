@@ -11,6 +11,20 @@ class Circle(Shape):
 
         self.__radius = radius
 
+    @property
+    def radius(self):
+        return self.__radius
+
+    @radius.setter
+    def radius(self, radius):
+        if not isinstance(radius, (float, int)):
+            raise TypeError(f'радиус должен быть числом, а не {type(radius).__name__}')
+
+        if self.__radius <= 0:
+            raise ValueError(f"радиус {self.__radius} должен быть больше нуля")
+
+        self.__radius = float(radius)
+
     def __repr__(self):
         return f"Circle({self.__radius})"
 
