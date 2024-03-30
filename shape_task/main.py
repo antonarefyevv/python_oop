@@ -7,6 +7,7 @@ from shape_task.circle import Circle
 def get_shape_with_max_area(shapes):
     if len(shapes) == 0:
         return None
+
     sorted_list = sorted(shapes, key=lambda sort_shape: sort_shape.get_area(), reverse=True)
     return sorted_list[0]
 
@@ -14,8 +15,8 @@ def get_shape_with_max_area(shapes):
 def get_shape_with_next_perimeter_after_max(shapes):
     if len(shapes) == 0:
         return None
-    sorted_list = sorted(shapes, key=lambda sort_shape: sort_shape.get_area(), reverse=True)
 
+    sorted_list = sorted(shapes, key=lambda sort_shape: sort_shape.get_area(), reverse=True)
     return sorted_list[1]
 
 
