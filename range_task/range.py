@@ -22,7 +22,7 @@ class Range:
             raise TypeError(f'Начало диапазона должно быть числом, а не {type(start).__name__}')
 
         if start >= self.__end:
-            raise ValueError(f"Начало диапазона {self.__start} должно быть меньше конца {self.__end}")
+            raise ValueError(f"Начало диапазона {start} должно быть меньше конца {self.__end}")
 
         self.__start = float(start)
 
@@ -36,7 +36,7 @@ class Range:
             raise TypeError(f'Конец диапазона должен быть числом, а не {type(end).__name__}')
 
         if self.__start >= end:
-            raise ValueError(f"Начало диапазона {self.__start} должно быть меньше конца {self.__end}")
+            raise ValueError(f"Начало диапазона {self.__start} должно быть меньше конца {end}")
 
         self.__end = float(end)
 
@@ -46,6 +46,7 @@ class Range:
     def __eq__(self, other):
         if not isinstance(other, type(self)):
             return NotImplemented
+
         return self.__start == other.__end and self.__end == other.__end
 
     def get_length(self):
@@ -68,13 +69,16 @@ class Range:
 
         result_start = min(self.__start, other.__start)
         result_end = max(self.__end, other.__end)
-        return Range(result_start, result_end)
+        return [Range(result_start, result_end)]
 
     def get_difference(self, other):
-        if (self.__start >= other.__start and self.__end <= other.__end) or self.__end < other.__start:
+        if self.__start >= other.__start and self.__end <= other.__end:
             return []
-        elif self.__end >= other.__end:
-            return [Range(self.__start, other.__start), Range(other.__start, other.__end)]
+        if self.__end < other.__start or other.__end < self.__start:
+            return [Range(self.__start, self.__end)]
+        if self.__start > other.__start and self.__end > other.__end:
+            return [Range(other.__end, self.__end)]
+        if self.__start < other.__start and self.__end > other.__end:
+            return [Range(self.__start, other.__start), Range(other.__end, self.__end)]
 
-        result_start = min(self.__start, other.__start)
-        return Range(result_start, other.__start)
+        return [Range(self.__start, other.__start)]

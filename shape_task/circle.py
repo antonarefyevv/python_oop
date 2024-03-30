@@ -24,13 +24,13 @@ class Circle(Shape):
         return hash(self.__radius)
 
     def get_width(self):
-        return self.__radius / 2
+        return self.__radius * 2
 
     def get_height(self):
-        return self.__radius / 2
+        return self.__radius * 2
 
     def get_area(self):
-        return float(f"{math.pi * math.pow(self.__radius, 2):.2f}")
+        return round(math.pi * math.pow(self.__radius, 2))
 
     def get_perimeter(self):
-        return 0
+        return 2 * math.pi * self.__radius
