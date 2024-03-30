@@ -8,9 +8,9 @@ class Rectangle(Shape):
         if not isinstance(side_width, (float, int)):
             raise TypeError(f'Ширина стороны прямоугольника должна быть числом, а не {type(side_length).__name__}')
         if side_length <= 0:
-            raise ValueError('Длина стороны квадрата должна быть больше нуля')
+            raise ValueError('Длина стороны прямоугольника должна быть больше нуля')
         if side_width <= 0:
-            raise ValueError('Ширина стороны квадрата должна быть больше нуля')
+            raise ValueError('Ширина стороны прямоугольника должна быть больше нуля')
 
         self.__side_length = side_length
         self.__side_width = side_width
