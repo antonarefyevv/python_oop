@@ -1,7 +1,7 @@
 from range_task.range import Range
 
 range_1 = Range(1, 5)
-range_2 = Range(0, 9)
+range_2 = Range(1, 3)
 
 intersection_range = range_1.get_intersection(range_2)
 
