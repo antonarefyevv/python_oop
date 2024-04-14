@@ -2,15 +2,13 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showerror
 
-import select
-
 
 class TemperatureWindow:
     def __init__(self, temperature_converter):
 
         self.__root = Tk()
 
-        self.__root.title('First app on Tkinter')
+        self.__root.title('Temperature Converter')
         self.__root.geometry('600x400')
 
         frame = ttk.Frame(borderwidth=1, relief=SOLID, padding=[10, 10])
