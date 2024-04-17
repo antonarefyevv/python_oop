@@ -5,7 +5,6 @@ import math
 class Circle(Shape):
     def __init__(self, radius):
 
-        self.__radius = None
         self.radius = radius
 
     @property
@@ -18,7 +17,7 @@ class Circle(Shape):
             raise TypeError(f'Радиус круга должен быть числом, а не {type(value).__name__}.')
 
         if value <= 0:
-            raise ValueError('Радиус круга должен быть больше нуля.')
+            raise ValueError(f'Радиус круга {value} должен быть больше нуля.')
 
         self.__radius = float(value)
 

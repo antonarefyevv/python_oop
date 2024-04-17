@@ -5,7 +5,7 @@ from shapes_task.circle import Circle
 
 
 def get_shape_with_max_area(shapes):
-    if len(shapes) <= 1:
+    if len(shapes) < 1:
         return None
 
     sorted_list = sorted(shapes, key=lambda sort_shape: sort_shape.get_area(), reverse=True)
@@ -20,15 +20,17 @@ def get_shape_with_next_perimeter_after_max(shapes):
     return sorted_list[1]
 
 
-shapes_list = [Square(5),
-               Square(2),
-               Triangle(0, 2, -1, 5, 1, 8),
-               Triangle(0, 2, 1, 5, 1, -8),
-               Rectangle(9, 5),
-               Circle(8)]
+shapes_list = [
+    Square(5),
+    Square(2),
+    Triangle(0, 3, -1, 5, 1, 8),
+    Triangle(0, 2, 1, 5, 1, -8),
+    Rectangle(9, 5),
+    Circle(8)
+]
 
-print(f"Фигура с максимальной площадью из заданного списка фигур "
-      f"= {get_shape_with_max_area(shapes_list)}")
-print(
-    f"Фигура со вторым по величине периметром из заданного списка фигур "
-    f"= {get_shape_with_next_perimeter_after_max(shapes_list)}")
+print(f"Фигура с максимальной площадью из заданного списка фигур = {get_shape_with_max_area(shapes_list)}")
+print("Фигура со вторым по величине периметром из заданного списка фигур = "
+      f"{get_shape_with_next_perimeter_after_max(shapes_list)}")
+
+print(Triangle(1, 3, 2, -5, -8, 4).get_area())

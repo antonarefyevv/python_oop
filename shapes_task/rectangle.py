@@ -3,8 +3,6 @@ from shapes_task.shape import Shape
 
 class Rectangle(Shape):
     def __init__(self, height, width):
-        self.__height = None
-        self.__width = None
 
         self.height = height
         self.width = width
@@ -19,7 +17,7 @@ class Rectangle(Shape):
             raise TypeError(f'Длина прямоугольника должна быть числом, а не {type(value).__name__}.')
 
         if value <= 0:
-            raise ValueError(f"Длина прямоугольника должна быть больше нуля.")
+            raise ValueError(f"Длина прямоугольника {value} должна быть больше нуля.")
 
         self.__height = float(value)
 
@@ -33,7 +31,7 @@ class Rectangle(Shape):
             raise TypeError(f'Ширина прямоугольника должна быть числом, а не {type(value).__name__}.')
 
         if value <= 0:
-            raise ValueError(f"Ширина прямоугольника должна быть больше нуля.")
+            raise ValueError(f"Ширина прямоугольника {value} должна быть больше нуля.")
 
         self.__width = float(value)
 
