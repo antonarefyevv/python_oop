@@ -3,15 +3,14 @@ from shapes_task.shape import Shape
 
 class Square(Shape):
     def __init__(self, side_length):
-
-        self.length = side_length
+        self.side_length = side_length
 
     @property
-    def length(self):
+    def side_length(self):
         return self.__side_length
 
-    @length.setter
-    def length(self, value):
+    @side_length.setter
+    def side_length(self, value):
         if not isinstance(value, (float, int)):
             raise TypeError(f'Длина стороны квадрата должна быть числом, а не {type(value).__name__}.')
 

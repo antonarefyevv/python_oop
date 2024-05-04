@@ -3,6 +3,8 @@ from range_task.range import Range
 range_1 = Range(1, 5)
 range_2 = Range(1, 3)
 
+print(range_1.get_length())
+
 intersection_range = range_1.get_intersection(range_2)
 
 if intersection_range is not None:

@@ -1,11 +1,31 @@
 class Vector:
-    def __init__(self, size = None, components=None):
-        if components is None:
-            components = []
-        components.append(size)
+    def __init__(self, items, size):
+        self.__items = items
+        self.__size = size
 
-        self.__size = [components] * size
-        self.__components = [components]
+
+
+    @property
+    def size(self):
+        return self.__size
+
+    @size.setter
+    def size(self, value):
+        if not isinstance(value, (float, int)):
+            raise TypeError(f'Параметры вектора должны быть числом, а не {type(value).__name__}.')
+
+        self.__size = float(value)
+
+    @property
+    def items(self):
+        return self.__items
+
+    @items.setter
+    def items(self, value):
+        if not isinstance(value, (float, int)):
+            raise TypeError(f'Параметры вектора должны быть числом, а не {type(value).__name__}.')
+
+        self.__items = float(value)
 
     def __repr__(self):
         return f"Vector({self.__size!r})"
