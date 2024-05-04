@@ -15,7 +15,7 @@ class Square(Shape):
             raise TypeError(f'Длина стороны квадрата должна быть числом, а не {type(value).__name__}.')
 
         if value <= 0:
-            raise ValueError(f"Длина стороны квадрата {value} должна быть больше нуля.")
+            raise ValueError("Длина стороны квадрата должна быть больше нуля.")
 
         self.__side_length = float(value)
 
@@ -41,4 +41,4 @@ class Square(Shape):
         return self.__side_length * self.__side_length
 
     def get_perimeter(self):
-        return self.length * 4
+        return self.__side_length * 4

@@ -4,7 +4,6 @@ import math
 
 class Triangle(Shape):
     def __init__(self, x_1, y_1, x_2, y_2, x_3, y_3):
-
         self.x_1 = x_1
         self.y_1 = y_1
         self.x_2 = x_2
@@ -13,7 +12,7 @@ class Triangle(Shape):
         self.y_3 = y_3
 
     @staticmethod
-    def __verify(value):
+    def __check_number(value):
         if not isinstance(value, (float, int)):
             raise TypeError(f'Координаты треугольника {value} должны быть числом, a не {type(value).__name__}.')
 
@@ -22,54 +21,54 @@ class Triangle(Shape):
         return self.__x_1
 
     @x_1.setter
-    def x_1(self, value):
-        self.__verify(value)
-        self.__x_1 = float(value)
+    def x_1(self, x_1):
+        self.__check_number(x_1)
+        self.__x_1 = float(x_1)
 
     @property
     def y_1(self):
         return self.__y_1
 
     @y_1.setter
-    def y_1(self, value):
-        self.__verify(value)
-        self.__y_1 = float(value)
+    def y_1(self, y_1):
+        self.__check_number(y_1)
+        self.__y_1 = float(y_1)
 
     @property
     def x_2(self):
         return self.__x_2
 
     @x_2.setter
-    def x_2(self, value):
-        self.__verify(value)
-        self.__x_2 = float(value)
+    def x_2(self, x_2):
+        self.__check_number(x_2)
+        self.__x_2 = float(x_2)
 
     @property
     def y_2(self):
         return self.__y_2
 
     @y_2.setter
-    def y_2(self, value):
-        self.__verify(value)
-        self.__y_2 = float(value)
+    def y_2(self, y_2):
+        self.__check_number(y_2)
+        self.__y_2 = float(y_2)
 
     @property
     def x_3(self):
         return self.__x_3
 
     @x_3.setter
-    def x_3(self, value):
-        self.__verify(value)
-        self.__x_3 = float(value)
+    def x_3(self, x_3):
+        self.__check_number(x_3)
+        self.__x_3 = float(x_3)
 
     @property
     def y_3(self):
         return self.__y_3
 
     @y_3.setter
-    def y_3(self, value):
-        self.__verify(value)
-        self.__y_3 = float(value)
+    def y_3(self, y_3):
+        self.__check_number(y_3)
+        self.__y_3 = float(y_3)
 
     @staticmethod
     def __get_length(*coordinates):
@@ -107,11 +106,6 @@ class Triangle(Shape):
         return ab_side_length + bc_side_length + ac_side_length
 
     def get_area(self):
-        epsilon = 1.0e-10
-        determinant = abs((self.__x_3 - self.__x_1) * (self.__y_2 - self.__y_1) - (self.__y_3 - self.__y_1) * (
-                self.__x_2 - self.__x_1))
+        return abs((self.__x_3 - self.__x_1) * (self.__y_2 - self.__y_1) - (self.__y_3 - self.__y_1) * (
+                self.__x_2 - self.__x_1)) * 0.5
 
-        if determinant <= epsilon:
-            return 0
-
-        return determinant * 0.5
