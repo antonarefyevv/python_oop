@@ -1,60 +1,81 @@
 class Vector:
-    def __init__(self, items, size):
-        self.__items = items
-        self.__size = size
+    def __init__(self, *args):
+        component = args[0]
+        if len(args) == 1:
+            if isinstance(component, int):
+                self.values = [0] * component
+            elif isinstance(component, list):
+                self.values = component
+            elif isinstance(component, Vector):
+                self.values = component.values
+            else:
+                raise ValueError("Неверный тип аргумента")
+        else:
+            self.values = args[1]
+            list_length = len(args[1])
+            if args[0] > list_length:
+                difference = component - len(args[1])
+                for i in range(difference):
+                    self.values.append(0)
 
-
-
-    @property
-    def size(self):
-        return self.__size
-
-    @size.setter
-    def size(self, value):
-        if not isinstance(value, (float, int)):
-            raise TypeError(f'Параметры вектора должны быть числом, а не {type(value).__name__}.')
-
-        self.__size = float(value)
-
-    @property
-    def items(self):
-        return self.__items
-
-    @items.setter
-    def items(self, value):
-        if not isinstance(value, (float, int)):
-            raise TypeError(f'Параметры вектора должны быть числом, а не {type(value).__name__}.')
-
-        self.__items = float(value)
+    # def __repr__(self):
+    #     return f'{self.values}'
 
     def __repr__(self):
-        return f"Vector({self.__size!r})"
+        return f"{{{', '.join(str(x) for x in self.values)}}}"
 
     def __iadd__(self, other):
         return
 
     def __len__(self):
-        return self.__size
+        return len(self.values)
 
-# def __operate(f, u, v):
-#     return Vector(*f(u, v))
-#
-#
-# def __str__(self):
-#     return "(" + str(self.x) + "," + str(self.y) + ")"
-#
-#
-# def __add__(self, other):
-#     return Vector.__operate(lambda u, v: (u.x + v.x, u.y + v.y), self, other)
-#
-#
-# def __sub__(self, other):
-#     return Vector.__operate(lambda u, v: (u.x - v.x, u.y - v.y), self, other)
-#
-#
-# def __mul__(self, other):
-#     return self.x * other.x + self.y * other.y
-#
-#
-# def __rmul__(self, k):
-#     return Vector(k * self.x, k * self.y)
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+
+        return self.values == other.values and self == other
+
+    def __hash__(self):
+        return hash(self.values)
+
+
+    def __add__(self, other):
+        if not isinstance(other, Vector):
+            raise TypeError("Сложение возможно только с другим вектором")
+
+        max_len = max(len(self.values), len(other.values))
+        self.values.extend([0] * (max_len - len(self.values)))
+        other.values.extend([0] * (max_len - len(other.values)))
+
+        return Vector([x + y for x, y in zip(self.values, other.values)])
+
+    def __sub__(self, other):
+        if not isinstance(other, Vector):
+            raise TypeError("Вычитание возможно только с другим вектором")
+
+        max_len = max(len(self.values), len(other.values))
+        self.values.extend([0] * (max_len - len(self.values)))
+        other.values.extend([0] * (max_len - len(other.values)))
+
+        return Vector([x - y for x, y in zip(self.values, other.values)])
+
+    def __mul__(self, scalar):
+        return Vector([x * scalar for x in self.values])
+
+
+
+    def __rmul__(self, k):
+        return list(map(lambda x: x * k, self.values))
+
+    def __copy__(self):
+        return Vector(*self.values)
+
+    def insert(self, index, value):
+        self.values[index] = value
+
+    def reverse(self):
+        return list(map(lambda x: x * -1, self.values))
+
+    def vectors_multiply(self, other):
+        return Vector(self.values, list(map(lambda x, y: x * y, self.values, other.values)))
