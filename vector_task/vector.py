@@ -18,9 +18,6 @@ class Vector:
                 for i in range(difference):
                     self.values.append(0)
 
-    # def __repr__(self):
-    #     return f'{self.values}'
-
     def __repr__(self):
         return f"{{{', '.join(str(x) for x in self.values)}}}"
 
@@ -38,7 +35,6 @@ class Vector:
 
     def __hash__(self):
         return hash(self.values)
-
 
     def __add__(self, other):
         if not isinstance(other, Vector):
@@ -62,8 +58,6 @@ class Vector:
 
     def __mul__(self, scalar):
         return Vector([x * scalar for x in self.values])
-
-
 
     def __rmul__(self, k):
         return list(map(lambda x: x * k, self.values))
